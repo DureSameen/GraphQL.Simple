@@ -1,16 +1,15 @@
+using GraphiQl;
 using GraphQL;
 using GraphQL.Server;
-using GraphQL.Server.Ui.Playground;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using QraphQLSimple.Data.Service;
 using QraphQLSimple.QraphQL.Query;
 using QraphQLSimple.QraphQL.WeatherSchema;
- 
+
 namespace QraphQLSimple
 {
     public class Startup
@@ -47,14 +46,11 @@ namespace QraphQLSimple
             {
                 app.UseDeveloperExceptionPage();
             }
-           
-             
+
+            app.UseGraphiQl("/graphiql","/graphql");
             app.UseGraphQL<WeatherForecastSchema>();
-            app.UseGraphQLPlayground(new GraphQLPlaygroundOptions());
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapControllers();
-            //});
+            // app.UseGraphQLPlayground(new GraphQLPlaygroundOptions());
+           
         }
     }
 }
